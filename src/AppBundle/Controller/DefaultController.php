@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Domain\Entity\Calendar;
 use AppBundle\Domain\Entity\Year;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -39,7 +40,10 @@ class DefaultController extends Controller
      * @Route("/offset", name="offset")
      */
     public function offsetAction(Request $request){
-        $offsets = $this->getYearOffsets(range(1983, 2016));
-        return $this->render(print_r($offsets, true));
+//        $offsets = $this->getYearOffsets(range(1983, 2016));
+        $calendar = new Calendar(1983, 2016);
+        return $this->render('default/calendar.html.twig', [
+            'calendar' => $calendar,
+        ]);
     }
 }
