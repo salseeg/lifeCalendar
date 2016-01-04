@@ -5,7 +5,48 @@
     <h1>Calendar</h1>
 
     <div class="calendar">
-        {{ dump(calendar) }}
+        {#{{ dump(calendar) }}#}
+
+        {% for year, y in calendar.years %}
+            <div class="year">
+                <label class="year-label">{{ year }}</label>
+
+                {% for number, w  in y.weeks %}
+                    <div class="week"
+                         data-number="{{ number }}"
+                    ></div>
+                {% endfor %}
+
+            </div>
+        {% endfor %}
+
     </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .calendar .year {
+        line-height: 1.4em;
+        float: left;
+        clear: left;
+        overflow-y: hidden;
+
+    }
+    .calendar .year label.year-label {
+        display: inline-block;
+        line-height: 1.6ex;
+        color: gray;
+    }
+    .calendar .year .week {
+        height: 1.6ex;
+        width: 1.6ex;
+        border: 1px solid lightgray;
+        display: inline-block;
+        /*margin: 0.1ex;*/
+    }
+
+</style>
+
 
 {% endblock %}
