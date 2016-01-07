@@ -19,18 +19,20 @@ class Calendar
     /** @var  int */
     protected $lastYear;
 
+    /** @var  \DateTime */
+    protected $birthDate;
+
     /** @var  Year[] */
     public $years;
 
-    /**
-     * Calendar constructor.
-     * @param int $firstYear
-     * @param int $lastYear
-     */
-    public function __construct($firstYear, $lastYear)
+    public function __construct(\DateTime $birthDate)
     {
-        $this->firstYear = $firstYear;
-        $this->lastYear = max($lastYear, $firstYear);
+        $this->birthDate = $birthDate;
+
+        $currentYear = (int) date("Y");
+
+        $this->firstYear = (int) $birthDate->format("Y");
+        $this->lastYear = max($currentYear + 20, $this->firstYear + 90);
 
         $this->fillYears();
     }

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace AppBundle\Domain\Entity;
 
+//use \int;
 
 class Year
 {
@@ -29,16 +30,16 @@ class Year
 
     /**
      * Year constructor.
-     * @param \int $year
+     * @param int $year
      */
-    function __construct(\int $year)
+    function __construct(int $year)
     {
         $this->year = $year;
         $this->firstWeekOffset = $this->calculateFirstWeekOffset($year);
         $this->fillWeeks();
     }
 
-    protected function calculateFirstWeekOffset(\int $year){
+    protected function calculateFirstWeekOffset(int $year){
         $d = new \DateTime($year.'-01-01');
         $dow = $d->format("w");     // 0 = sun , 1-6 = mon-sat
         $dow += ($dow == 0) ? 7 : 0;    // 1-7 = mon-sun
@@ -52,7 +53,7 @@ class Year
     }
 
     /**
-     * @return \int
+     * @return int
      */
     public function getFirstWeekOffset()
     {
@@ -65,10 +66,10 @@ class Year
     }
 
     /**
-     * @param \int $day
+     * @param int $day
      * @return int
      */
-    public function getWeekOfDay(\int $day){
+    public function getWeekOfDay(int $day){
         $day -= $this->firstWeekOffset;
         if ($day <= 0){
             return -1;
